@@ -21,3 +21,6 @@
 2. Notification system is just a dummy use case where I am logging message. We can build real one.
 
 3. I can build payment tracking system for patient. Need to implement receive payment api, due payment api.
+
+                                            Design doc
+Please refer design doc directory in project.
