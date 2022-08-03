@@ -15,7 +15,7 @@
 
                 Things not implemented due to lack of time. (office work/ home work / projects)
 
-1. If patient multiple time I am not maintaining history. Can be done via token. Will create a patient_history table where
+1. If patient admitted multiple time I am not maintaining history. Can be done via token. Will create a patient_history table where
    log patient details, date and time of admit/discharge, staff person name who admitted/discharged
 
 2. Notification system is just a dummy use case where I am logging message. We can build real one.
