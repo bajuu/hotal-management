@@ -1,0 +1,27 @@
+@startuml
+
+title Login signup flow
+
+actor Admin
+actor User
+control "service-hotel-management" as service
+database H2 as db
+actor Notification as notification
+
+group Step1: When employee will join the hospital
+    Admin -> service : ""POST /account/signup""
+    service -> service : Generate employee id
+    service -> service : Generate password and encrypt it
+    service -> db : Storing employee details along with employee id and encrypted password
+    service -> notification : call notification
+    notification -> User : Welcome message along with login credentials to user via email/password
+end
+
+group Step2: Password update
+    User -> service: user login via credentials received in sms ""GET /account/login""
+    User -> service : update password ""PUT /update/password/{employeeId}""
+    service -> service : verify employee details
+    service -> db : updates the new password after encrypt
+end
+
+@enduml

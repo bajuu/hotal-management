@@ -1,0 +1,35 @@
+@startuml
+
+title Patient flow
+
+actor Patient
+actor Staff
+control "service-hotel-management" as service
+database H2 as db
+actor Notification as notification
+
+group Step1: Patient admit flow
+    Staff -> service : ""POST /patient/admit""
+    service -> service : verify some edge cases
+    service -> db :  save patient data and her/his expenses
+    service -> Staff : return success message
+end
+
+group Step2: Add expenses as and when required
+    Staff -> service: expense details along with patient details ""POST /patient/expenses/add""
+    service -> service : Verify the patient details
+    service -> db : Create new expense against patient
+    service -> Staff: Success message
+end
+
+group Step3: Discharge patient
+    Staff -> service: request of discharge ""PUT /patient/discharge""
+    service -> service : Verify the patient details
+    service -> service : verify the No due payment.
+    service -> db : Mark patient as discharged
+    service -> notification: request to send message to patient
+    notification -> patient : Good wishes message
+    service -> Staff: Success message
+end
+
+@enduml
